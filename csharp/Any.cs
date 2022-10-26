@@ -10,7 +10,7 @@ namespace csharp
     internal class Any
     {
         private static readonly Random SellIn = new Random();
-        private static Random Quality = new Random();
+        private static readonly Random Quality = new Random();
 
         public List<Item> GenerateGenericItem()
         {
@@ -29,6 +29,7 @@ namespace csharp
         public List<Item> GenerateSulfuras()
         {
             Item item = GenerateItemTemplate("Sulfuras, Hand of Ragnaros");
+            item.Quality = 80;
 
             return new List<Item> { item };
         }
@@ -39,6 +40,13 @@ namespace csharp
             item.SellIn = SellIn.Next(minDaysLeft, maxDaysLeft);
 
             return new List<Item> { item };
+        }
+
+        public int SetSellIn(int minDaysLeft = 12, int maxDaysLeft = 49)
+        {
+            var sellIn = SellIn.Next(minDaysLeft, maxDaysLeft);
+
+            return sellIn;
         }
 
         private static Item GenerateItemTemplate(string itemName)

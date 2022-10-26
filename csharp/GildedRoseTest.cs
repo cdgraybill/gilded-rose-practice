@@ -38,6 +38,21 @@ namespace csharp
         }
 
         [Test]
+        public void UpdateItems_LowerQualityByTwo_WhenGenericItem_PastSellInDate()
+        {
+            var any = new Any();
+
+            var items = any.GenerateGenericItem();
+            var quality = items[0].Quality;
+
+            GildedRose app = new GildedRose(items);
+            app.UpdateItems();
+
+            Assert.AreEqual("Sword", items[0].Name);
+            Assert.AreEqual(quality - 1, items[0].Quality);
+        }
+
+        [Test]
         public void UpdateItems_LowerSellInByOne_WhenAgedBrie()
         {
             var any = new Any();

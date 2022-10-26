@@ -38,18 +38,19 @@ namespace csharp
         }
 
         [Test]
-        public void UpdateItems_LowerQualityByTwo_WhenGenericItem_PastSellInDate()
+        public void UpdateItems_LowerQualityByTwo_WhenGenericItem_SellInDatePassed()
         {
             var any = new Any();
 
             var items = any.GenerateGenericItem();
             var quality = items[0].Quality;
+            items[0].SellIn = 0;
 
             GildedRose app = new GildedRose(items);
             app.UpdateItems();
 
             Assert.AreEqual("Sword", items[0].Name);
-            Assert.AreEqual(quality - 1, items[0].Quality);
+            Assert.AreEqual(quality - 2, items[0].Quality);
         }
 
         [Test]
@@ -80,6 +81,22 @@ namespace csharp
 
             Assert.AreEqual("Aged Brie", items[0].Name);
             Assert.AreEqual(quality + 1, items[0].Quality);
+        }
+
+        [Test]
+        public void UpdateItems_IncreaseQualityByTwo_WhenAgedBrie_SellInDatePassed()
+        {
+            var any = new Any();
+
+            var items = any.GenerateAgedBrie();
+            var quality = items[0].Quality;
+            items[0].SellIn = 0;
+
+            GildedRose app = new GildedRose(items);
+            app.UpdateItems();
+
+            Assert.AreEqual("Aged Brie", items[0].Name);
+            Assert.AreEqual(quality + 2, items[0].Quality);
         }
 
         [Test]

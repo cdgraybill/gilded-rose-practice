@@ -42,13 +42,6 @@ namespace csharp
             return new List<Item> { item };
         }
 
-        public int SetSellIn(int minDaysLeft = 12, int maxDaysLeft = 49)
-        {
-            var sellIn = SellIn.Next(minDaysLeft, maxDaysLeft);
-
-            return sellIn;
-        }
-
         private static Item GenerateItemTemplate(string itemName)
         {
             var item = new Item()
